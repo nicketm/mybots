@@ -20,16 +20,8 @@ p.loadSDF("world.sdf")
 pyrosim.Prepare_To_Simulate(robotId)
 
 
-targetAngles_BL = np.array([])
-for i in range(1, 1000): 
-    targetAngles_BL = np.append(targetAngles_BL, c.amplitude_BL * np.sin(c.frequency_BL*c.mottorcommandvector[i]+c.phaseOffset_BL))
-
-targetAngles_FL = np.array([])
-for i in range(1, 1000): 
-    targetAngles_FL = np.append(targetAngles_FL, c.amplitude_FL * np.sin(c.frequency_FL*c.mottorcommandvector[i]+c.phaseOffset_FL))
-
-np.save('data/targetAngles_BL', targetAngles_BL)
-np.save('data/targetAngles_FL', targetAngles_FL)
+#np.save('data/targetAngles_BL', targetAngles_BL)
+#np.save('data/targetAngles_FL', targetAngles_FL)
 
 for i in range(1,1000): 
     p.stepSimulation()
@@ -43,7 +35,7 @@ for i in range(1,1000):
 
     controlMode = p.POSITION_CONTROL,
 
-    targetPosition = targetAngles_BL[i],
+    targetPosition = c.targetAngles_BL[i],
 
     maxForce = 200)
 
@@ -56,7 +48,7 @@ for i in range(1,1000):
 
     controlMode = p.POSITION_CONTROL,
 
-    targetPosition = targetAngles_FL[i],
+    targetPosition = c.targetAngles_FL[i],
 
     maxForce = 200)
 
