@@ -14,7 +14,7 @@ class MOTOR:
     def __init__(self, jointName):
         self.jointName = jointName
         print(self.jointName)
-        self.amplitude = c.amplitude
+        self.amplitude = c.amplitude * 1.5 
         self.frequency = c.frequency
         self.offset = c.phaseOffset
         self.Prepare_To_Act()
@@ -26,12 +26,13 @@ class MOTOR:
         self.motorValues = np.array([])
         mottorcommandvector = np.linspace(0,2 * np.pi, 1000)
         for i in range(1000): 
-            print(self.jointName)
             if self.jointName == b'Torso_BackLeg': 
                 print('I AM HERE LOLOLOLOLOLOLOL')
-                self.amplitude = self.amplitude / 2
+                print(self.amplitude)
+                self.amplitude = (c.amplitude * 1.5) / 2
                 self.motorValues = np.append(self.motorValues, self.amplitude * np.sin(self.frequency * mottorcommandvector[i]+self.offset))
             else: 
+                print(self.amplitude)
                 self.motorValues = np.append(self.motorValues, self.amplitude * np.sin(self.frequency * mottorcommandvector[i]+self.offset))
 
             
