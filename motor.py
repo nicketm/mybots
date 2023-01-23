@@ -17,7 +17,6 @@ class MOTOR:
         self.amplitude = c.amplitude * 1.5 
         self.frequency = c.frequency
         self.offset = c.phaseOffset
-        #self.Prepare_To_Act()
         
     
 
