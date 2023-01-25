@@ -1,4 +1,5 @@
 import pyrosim.pyrosim as pyrosim
+import random 
 
 length = 1
 width = 1
@@ -36,6 +37,12 @@ def Generate_Brain():
     pyrosim.Send_Synapse( sourceNeuronName = 0 , targetNeuronName = 4 , weight = 1.0 )
     pyrosim.Send_Synapse( sourceNeuronName = 1 , targetNeuronName = 4 , weight = 1.0 )
     pyrosim.Send_Synapse( sourceNeuronName = 2 , targetNeuronName = 4 , weight = 1.0 )
+
+
+    for sneuron in [0, 1, 2]: 
+        for mneuron in [3, 4]: 
+            pyrosim.Send_Synapse( sourceNeuronName = sneuron , targetNeuronName = mneuron , weight = random.random() )
+
     pyrosim.End()
 Create_World()
 Generate_Body()
