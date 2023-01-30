@@ -16,15 +16,15 @@ import sys
 
 class SIMULATION:
 
-    def __init__(self, directOrGui):
-        print(directOrGui)
+    def __init__(self, directOrGui, solutionID):
+        self.directOrGui = directOrGui
         if directOrGui == 'DIRECT': 
             physicsClient = p.connect(p.DIRECT)
         else: 
             physicsClient = p.connect(p.GUI)
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         p.setGravity(0,0,-9.8)
-        self.robot = ROBOT()
+        self.robot = ROBOT(solutionID)
         self.world = WORLD()
         self.robotId = self.robot.robotId
         #pyrosim.Prepare_To_Simulate(self.robotId)
@@ -37,8 +37,8 @@ class SIMULATION:
             self.robot.Sense(i)
             self.robot.Think()
             self.robot.Act(i)
-
-            time.sleep(1/4000)
+            if self.directOrGui == 'GUI': 
+                time.sleep(1/4000)
     def __del__(self):
         p.disconnect()
     def Get_Fitness(self): 
