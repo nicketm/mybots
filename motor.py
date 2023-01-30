@@ -13,7 +13,6 @@ class MOTOR:
 
     def __init__(self, jointName):
         self.jointName = jointName
-        print(self.jointName)
         self.amplitude = c.amplitude * 1.5 
         self.frequency = c.frequency
         self.offset = c.phaseOffset

@@ -8,15 +8,20 @@ import numpy as np
 import random
 import constants as c
 from pyrosim.neuralNetwork import NEURAL_NETWORK
+import sys
+
 
 
 
 
 class SIMULATION:
 
-    def __init__(self):
-        
-        physicsClient = p.connect(p.GUI)
+    def __init__(self, directOrGui):
+        print(directOrGui)
+        if directOrGui == 'DIRECT': 
+            physicsClient = p.connect(p.DIRECT)
+        else: 
+            physicsClient = p.connect(p.GUI)
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         p.setGravity(0,0,-9.8)
         self.robot = ROBOT()

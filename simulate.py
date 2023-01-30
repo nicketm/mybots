@@ -6,10 +6,14 @@ import numpy as np
 import random
 import constants as c
 from simulation import SIMULATION
+import sys
 
 
 
-simulation = SIMULATION()
+
+
+directOrGui = sys.argv[1]
+simulation = SIMULATION(directOrGui)
 simulation.Get_Fitness()
 """
 physicsClient = p.connect(p.GUI)
