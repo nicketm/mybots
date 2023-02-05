@@ -49,12 +49,10 @@ class PARALLEL_HILL_CLIMBER:
 
 
     def Select(self): 
-        print('IN SELECT')
         for key in self.parents: 
             print(self.parents[key].fitness)
             print(self.children[key].fitness)
             if self.parents[key].fitness > self.children[key].fitness: 
-                print('AM IN IF STATEMENT')
                 self.parents[key] = self.children[key]
         
         
