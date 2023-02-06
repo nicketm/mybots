@@ -31,7 +31,7 @@ for i in range(1, 1000):
 numberOfGenerations = 10
 populationSize = 2
 
-numSensorNeurons = 13
-numMotorNeurons = 12
+numSensorNeurons = 3
+numMotorNeurons = 2
 
 motorJointAngle = .5
