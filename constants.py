@@ -34,4 +34,4 @@ populationSize = 2
 numSensorNeurons = 13
 numMotorNeurons = 12
 
-motorJointAngle = .2
+motorJointAngle = .5
