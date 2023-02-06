@@ -9,6 +9,7 @@ import random
 import constants as c
 from pyrosim.neuralNetwork import NEURAL_NETWORK
 import os
+from world import WORLD
 
 class ROBOT:
 
@@ -16,6 +17,7 @@ class ROBOT:
         self.solutionID = solutionID
         self.robotId = p.loadURDF("body.urdf")
         self.nn = NEURAL_NETWORK("brain" + str(solutionID) + ".nndf")
+        #self.world = WORLD()
         pyrosim.Prepare_To_Simulate(self.robotId)
         ROBOT.Prepare_To_Sense(self)
         ROBOT.Prepare_To_Act(self)
@@ -38,15 +40,10 @@ class ROBOT:
 
     def Act(self, desiredAngle): 
         for neuronName in self.nn.Get_Neuron_Names():
-            #print(self.motors)
             if self.nn.Is_Motor_Neuron(neuronName):
                 jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
-                #print(jointName)
                 desiredAngle = self.nn.Get_Value_Of(neuronName) 
                 self.motors[bytes(jointName, 'utf-8')].Set_Value(self.robotId, desiredAngle)
-                #print(neuronName)
-                #print(jointName)
-                #print(desiredAngle)
 
 
     def Think(self): 
@@ -56,11 +53,10 @@ class ROBOT:
     def Get_Fitness(self): 
         basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)
         basePosition = basePositionAndOrientation[0]
-        print(basePosition)
         xPosition = basePosition[0]
         yPosition = basePosition[1]
         optimized = xPosition * yPosition
-        
+        #cubeloc = self.world.get_location(self.world.worldSDF)
         temp_s = 'tmp' + str(self.solutionID) + '.txt'
         fitness_s = 'fitness' + str(self.solutionID) + '.txt'
         f = open(temp_s, 'w')
