@@ -1,6 +1,6 @@
 <sdf>
     <model name="Box">
-        <pose>-5 -1 0 0 0 0 </pose>
+        <pose>-1 10 0 0 0 0 </pose>
         <link name="Box">
             <inertial>
                 <mass>100</mass>
@@ -30,7 +30,7 @@
         </link>
     </model>
     <model name="Box">
-        <pose>-5 5 0 0 0 0 </pose>
+        <pose>4 10 0 0 0 0 </pose>
         <link name="Box">
             <inertial>
                 <mass>100</mass>
@@ -60,7 +60,7 @@
         </link>
     </model>
     <model name="Box">
-        <pose>-5 10 0 0 0 0 </pose>
+        <pose>7 10 0 0 0 0 </pose>
         <link name="Box">
             <inertial>
                 <mass>100</mass>
@@ -90,7 +90,7 @@
         </link>
     </model>
     <model name="Box">
-        <pose>-5 15 0 0 0 0 </pose>
+        <pose>-2 5 0 0 0 0 </pose>
         <link name="Box">
             <inertial>
                 <mass>100</mass>
@@ -120,7 +120,7 @@
         </link>
     </model>
     <model name="Box">
-        <pose>-10 0 0 0 0 0 </pose>
+        <pose>3 5 0 0 0 0 </pose>
         <link name="Box">
             <inertial>
                 <mass>100</mass>
@@ -150,7 +150,7 @@
         </link>
     </model>
     <model name="Box">
-        <pose>-10 4 0 0 0 0 </pose>
+        <pose>5 5 0 0 0 0 </pose>
         <link name="Box">
             <inertial>
                 <mass>100</mass>

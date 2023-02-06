@@ -50,9 +50,7 @@ class PARALLEL_HILL_CLIMBER:
 
     def Select(self): 
         for key in self.parents: 
-            print(self.parents[key].fitness)
-            print(self.children[key].fitness)
-            if self.parents[key].fitness > self.children[key].fitness: 
+            if self.parents[key].fitness < self.children[key].fitness: 
                 self.parents[key] = self.children[key]
         
         
@@ -66,10 +64,11 @@ class PARALLEL_HILL_CLIMBER:
             print('parent fitness: ', self.parents[key].fitness, 'child fitness: ', self.children[key].fitness)
             print('\n')
     def Show_Best(self): 
-        lf = 100000000
+        print('in show best')
+        lf = 0
         keyid = -1
         for parent in self.parents: 
-            if self.parents[parent].fitness < lf: 
+            if self.parents[parent].fitness > lf: 
                 lf = self.parents[parent].fitness
                 keyid = parent
         
