@@ -42,7 +42,7 @@ class ROBOT:
             if self.nn.Is_Motor_Neuron(neuronName):
                 jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
                 #print(jointName)
-                desiredAngle = self.nn.Get_Value_Of(neuronName) 
+                desiredAngle = self.nn.Get_Value_Of(neuronName) * 3
                 self.motors[bytes(jointName, 'utf-8')].Set_Value(self.robotId, desiredAngle)
                 #print(neuronName)
                 #print(jointName)
@@ -58,6 +58,7 @@ class ROBOT:
         basePosition = basePositionAndOrientation[0]
         xPosition = basePosition[0]
         yPosition = basePosition[1]
+        optimized = xPosition * yPosition
         
         temp_s = 'tmp' + str(self.solutionID) + '.txt'
         fitness_s = 'fitness' + str(self.solutionID) + '.txt'
