@@ -72,11 +72,23 @@ class PARALLEL_HILL_CLIMBER:
                 lf = self.parents[parent].fitness
                 keyid = parent
         
-        self.parents[parent].Start_Simulation("GUI")
+        self.parents[keyid].Start_Simulation("GUI")
 
         #self.parent.Evaluate("GUI")
         pass
+    def Show_Worst(self): 
+        print('in show worst')
+        lf = 10000000
+        keyid = -1
+        for parent in self.parents: 
+            if self.parents[parent].fitness < lf: 
+                lf = self.parents[parent].fitness
+                keyid = parent
+        
+        self.parents[keyid].Start_Simulation("GUI")
 
+        #self.parent.Evaluate("GUI")
+        pass
     def Evaluate(self, solutions):
         for parent in solutions: 
             #self.parents[parent].Evaluate("GUI")
