@@ -2,7 +2,7 @@ Nicket Mauskar Assignment 5
 
     Summary: 
         The goal of this project was to create a car-like robot that could carry a passenger(a cube) and carry it straight through 
-        a pathway created signified by obstacles without letting the cube fall. 
+        a pathway signified by obstacles without letting the cube fall. 
 
     Reproduction Steps: 
         1. run 'python search.py'
