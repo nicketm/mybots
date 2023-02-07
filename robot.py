@@ -23,6 +23,7 @@ class ROBOT:
         ROBOT.Prepare_To_Act(self)
         deletestring = "rm brain" + str(solutionID) + ".nndf"
         os.system(deletestring)
+        self.ballLocation = 0
     
     def Prepare_To_Sense(self): 
         self.sensors = {}
@@ -55,14 +56,20 @@ class ROBOT:
         basePosition = basePositionAndOrientation[0]
         xPosition = basePosition[0]
         yPosition = basePosition[1]
-        optimized = xPosition * yPosition
+        optimized = yPosition
+        if xPosition < -2 or xPosition > 3: 
+            optimized = yPosition - 10 
+        if self.ballLocation < .35: 
+            optimized = optimized -50
+
         #cubeloc = self.world.get_location(self.world.worldSDF)
         temp_s = 'tmp' + str(self.solutionID) + '.txt'
         fitness_s = 'fitness' + str(self.solutionID) + '.txt'
         f = open(temp_s, 'w')
-        f.write(str(yPosition))
+        f.write(str(optimized))
         os.system('mv ' +  temp_s + ' ' + fitness_s)
         exit()
-
+    def saveBall(self, loc): 
+        self.ballLocation = loc
 
 

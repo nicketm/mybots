@@ -34,9 +34,11 @@ class SIMULATION:
     def Run(self): 
         for i in range(1,5000): 
             p.stepSimulation()
+            ballLoc = self.world.get_location()
             self.robot.Sense(i)
             self.robot.Think()
             self.robot.Act(i)
+            self.robot.saveBall(ballLoc)
             if self.directOrGui == 'GUI': 
                 time.sleep(1/4000)
     def __del__(self):
