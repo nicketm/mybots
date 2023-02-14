@@ -1,8 +1,7 @@
 Nicket Mauskar Assignment 5
 
     Summary: 
-        The goal of this project was to create a car-like robot that could carry a passenger(a cube) and carry it straight through 
-        a pathway signified by obstacles without letting the cube fall. 
+        The goal of this project was to create a program that generates a kinematic chain (a jointed, motorized, innervated, sensorized snake) with a random number of randomly shaped links with random sensor placement along the chain.
 
     Reproduction Steps: 
         1. run 'python search.py'
