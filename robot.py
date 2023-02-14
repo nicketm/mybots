@@ -14,6 +14,7 @@ from world import WORLD
 class ROBOT:
 
     def __init__(self, solutionID):
+        print('init robot')
         self.solutionID = solutionID
         self.robotId = p.loadURDF("body.urdf")
         self.nn = NEURAL_NETWORK("brain" + str(solutionID) + ".nndf")
@@ -43,7 +44,7 @@ class ROBOT:
         for neuronName in self.nn.Get_Neuron_Names():
             if self.nn.Is_Motor_Neuron(neuronName):
                 jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
-                desiredAngle = self.nn.Get_Value_Of(neuronName) 
+                desiredAngle = self.nn.Get_Value_Of(neuronName) * 2.5
                 self.motors[bytes(jointName, 'utf-8')].Set_Value(self.robotId, desiredAngle)
 
 
@@ -61,15 +62,13 @@ class ROBOT:
             optimized = yPosition - 10 
         if self.ballLocation < .35: 
             optimized = optimized -50
-
+        print('in get fitness')
         #cubeloc = self.world.get_location(self.world.worldSDF)
         temp_s = 'tmp' + str(self.solutionID) + '.txt'
         fitness_s = 'fitness' + str(self.solutionID) + '.txt'
         f = open(temp_s, 'w')
-        f.write(str(optimized))
+        f.write(str(xPosition))
         os.system('mv ' +  temp_s + ' ' + fitness_s)
         exit()
-    def saveBall(self, loc): 
-        self.ballLocation = loc
 
 

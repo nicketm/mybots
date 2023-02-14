@@ -16,7 +16,6 @@ class WORLD:
         self.worldSDF = p.loadSDF("world.sdf")
         #self.get_location()
     def get_location(self): 
-        posAndOrientation = p.getBasePositionAndOrientation(self.worldSDF[0])
 
         position = posAndOrientation[0]
 
