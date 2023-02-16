@@ -20,23 +20,6 @@ class SOLUTION:
         #self.numlinks = 2 
         print('sensor ind', self.sensor_ind)
 
-    def Evaluate(self, guiOrDirect): 
-        print('IN EVALUATE FOR SOME REASON')
-        self.Create_World()
-        self.Generate_Body()
-        self.Generate_Brain()
-        #os.system("python simulate.py " + guiOrDirect)
-        os_string = ("python3 simulate.py " + guiOrDirect + " " + str(self.myID) + " 2&>1 &")
-
-        os.system(os_string)
-        fitness_s = 'fitness' + str(self.myID) + '.txt'
-        while not os.path.exists(fitness_s):
-            time.sleep(0.01)
-        f = open(fitness_s, "r")
-        self.fitness = float(f.read())
-        #print(self.fitness)
-        f.close()
-
 
     def Start_Simulation(self, guiOrDirect): 
         self.Create_World()
@@ -116,6 +99,7 @@ class SOLUTION:
 
 
     def Mutate(self): 
+        print('IN MUTATE')
         randomRow = random.randint(0, c.numSensorNeurons - 1)
         randomColumn = random.randint(0, c.numMotorNeurons - 1)
         self.weights[randomRow, randomColumn] = random.random() * 2 - 1
