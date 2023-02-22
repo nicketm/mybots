@@ -15,8 +15,12 @@ Nicket Mauskar Assignment 7
             Generated a random number 1-5 which signified the directions of expansion(+x, +y, +z, -x, -y). After this, it randomly chooses a link from a dictionary of already established links (every time I add a link, I add the linkname: position into a dictionary). I also have a collision checker dictionary which keeps track of all the directions that a certain link has expanded to, and before adding another link, I check if the cube has been expanded in the randomly chosen direction already. If it has, then I choose another direction and try again. If not, then I continue to expand the creature with less chances of collisions. 
         4.  Constantly Update the links dictionary and collision dictionary
             Everytime a new link is placed, I make sure to update these two dictionaries such that any time I add a new link to a random link from before, I have all the position, joint, and axis information of that parent link such that my child link will have the most optimal position and connection with said parent link. 
+            
+  
+  
+Morphospace: The body shapes and movements that are created by my creature are pretty much endless considering that it can fill up any amount of space, any one of the links can be motorized to different powers, and the jointAxis for every connection is randomized to create some variability from a just creating a grid of links. I found that using an odd number of total links creates the best creatures.    
 
-    Diagram: *** PLEASE REFER TO DIAGRAMREADME.jpg to see a visual diagram on how the first 3...n cubes would be generated. ***
+Diagram: *** PLEASE REFER TO DIAGRAMREADME.jpg to see a visual diagram on how the first 3...n cubes would be generated. ***
 
 Sources: 
 1. r/ludobots - https://www.reddit.com/r/ludobots/
