@@ -17,13 +17,6 @@ class MOTOR:
         self.frequency = c.frequency
         self.offset = c.phaseOffset
         
-    
-
-
-    
-
-            
-    
     def Set_Value(self, robot, desiredAngle): 
         pyrosim.Set_Motor_For_Joint(
 
