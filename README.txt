@@ -18,6 +18,9 @@ Nicket Mauskar Assignment 7
 
     Diagram: *** PLEASE REFER TO DIAGRAMREADME.jpg to see a visual diagram on how the first 3...n cubes would be generated. ***
 
+Sources: 
+1. r/ludobots - https://www.reddit.com/r/ludobots/
+2. pyrosim - https://www.thunderheadeng.com/pyrosim
 
         
      
