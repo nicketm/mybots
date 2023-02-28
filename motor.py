@@ -13,8 +13,8 @@ class MOTOR:
 
     def __init__(self, jointName):
         self.jointName = jointName
-        self.amplitude = c.amplitude * 1.5 
-        self.frequency = c.frequency
+        self.amplitude = c.amplitude * 2
+        self.frequency = c.frequency 
         self.offset = c.phaseOffset
         
     def Set_Value(self, robot, desiredAngle): 
