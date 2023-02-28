@@ -16,7 +16,10 @@ class ROBOT:
     def __init__(self, solutionID):
         print('init robot')
         self.solutionID = solutionID
-        self.robotId = p.loadURDF("body.urdf")
+        print(self.solutionID)
+        filename = "body" + str(self.solutionID) + ".urdf"
+        self.robotId = p.loadURDF(filename)
+        #self.robotId = p.loadURDF("body.urdf")
         self.nn = NEURAL_NETWORK("brain" + str(solutionID) + ".nndf")
         #self.world = WORLD()
         pyrosim.Prepare_To_Simulate(self.robotId)
@@ -44,7 +47,7 @@ class ROBOT:
         for neuronName in self.nn.Get_Neuron_Names():
             if self.nn.Is_Motor_Neuron(neuronName):
                 jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
-                desiredAngle = self.nn.Get_Value_Of(neuronName) * 1
+                desiredAngle = self.nn.Get_Value_Of(neuronName) * .7
                 self.motors[bytes(jointName, 'utf-8')].Set_Value(self.robotId, desiredAngle)
 
 
@@ -55,7 +58,7 @@ class ROBOT:
     def Get_Fitness(self): 
         basePositionAndOrientation = p.getBasePositionAndOrientation(self.robotId)
         basePosition = basePositionAndOrientation[0]
-        xPosition = basePosition[0]
+        xPosition = abs(basePosition[0])
         yPosition = basePosition[1]
         optimized = yPosition
         if xPosition < -2 or xPosition > 3: 
@@ -68,6 +71,7 @@ class ROBOT:
         fitness_s = 'fitness' + str(self.solutionID) + '.txt'
         f = open(temp_s, 'w')
         f.write(str(xPosition))
+        f.close()
         os.system('mv ' +  temp_s + ' ' + fitness_s)
         exit()
 

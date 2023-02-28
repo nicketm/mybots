@@ -10,6 +10,7 @@ from body import BODY
 
 class SOLUTION: 
     def __init__(self, nextAvailableID):
+        random.seed()
         self.myID = nextAvailableID
         self.numlinks = np.random.randint(4,5) 
         print('numlinks', self.numlinks)
@@ -21,7 +22,7 @@ class SOLUTION:
         #self.numlinks = 2 
         print('sensor ind', self.sensor_ind)
         self.joints = []
-        self.bodyID = 1
+        self.bodyID = nextAvailableID
         self.bodies = {}
 
 
@@ -31,8 +32,14 @@ class SOLUTION:
         self.Generate_Brain()
         #os.system("python simulate.py " + guiOrDirect)
         os_string = ("python3 simulate.py " + guiOrDirect + " " + str(self.myID) + " &")
-
         os.system(os_string)
+    def Continue_Simulation(self, guiOrDirect): 
+        self.Create_World()
+        self.bodies[self.bodyID].Generate_Body(self.myID)
+        self.bodies[self.bodyID].Generate_Brain(self.myID)
+        os_string = ("python3 simulate.py " + guiOrDirect + " " + str(self.myID) + " &")
+        os.system(os_string)
+        
     def Wait_For_Simulation_To_End(self): 
         fitness_s = 'fitness' + str(self.myID) + '.txt'
         while not os.path.exists(fitness_s):
@@ -52,14 +59,14 @@ class SOLUTION:
         #pyrosim.Send_Cube(name="Box", pos=[-3,0,0] , size=[1,1,1])
         pyrosim.End()
 
-
+    
     def Generate_Body(self):
         self.joints = []
         sizex =  np.random.uniform(.75, 1.25)
         sizey =  np.random.uniform(.75, 1.25)
         sizez =  np.random.uniform(.75, 1.25)
-        #filename = "body" + str(self.myID) + ".urdf"
-        filename = "body.urdf"
+        filename = "body" + str(self.myID) + ".urdf"
+        #filename = "body.urdf"
         pyrosim.Start_URDF(filename)
         directionx = {}
         collision = {}
@@ -167,9 +174,7 @@ class SOLUTION:
                 #else: 
                     #continue
             jointaxis[(randkey, i)] = JA
-        print(sizes)
         self.bodies[self.bodyID] = BODY(self.bodyID, self.weights, self.joints, directionx, jointaxis, sizes, self.sensor_ind, self.numlinks)
-        self.bodyID += 1
         pyrosim.End()
 
 
@@ -195,16 +200,12 @@ class SOLUTION:
 
 
 
-    def Mutate(self): 
+    def Mutate(self, bodyID): 
         # Change the weights(1)
-        randomRow = random.randint(0, c.numSensorNeurons - 1)
-        randomColumn = random.randint(0, c.numMotorNeurons - 1)
-        self.weights[randomRow, randomColumn] = random.random() * 2 - 1
-
-
-        bdy = self.bodies[1]
-        # Regenerating new body
-        bdy.Generate_Body()
+        #randomRow = random.randint(0, c.numSensorNeurons - 1)
+        #randomColumn = random.randint(0, c.numMotorNeurons - 1)
+        #self.weights[randomRow, randomColumn] = random.random() * 2 - 1
+        bdy = self.bodies[bodyID]
         mutation_choice = [1, 2, 3, 4]
         # Change the weights(1)
         randomRow = random.randint(0, bdy.numlinks - 1)
@@ -217,17 +218,19 @@ class SOLUTION:
         sizechoice = ['x', 'y', 'z']
         axis = sizechoice[random.randint(0, 2)]
         if axis == 'x': 
-            bdy.sizes[linknum][0] = np.random.uniform(.75, 1.25)     
+            bdy.sizes[linknum][0] = np.random.uniform(.2, 2)     
         if axis == 'y': 
-            bdy.sizes[linknum][1] = np.random.uniform(.75, 1.25) 
+            bdy.sizes[linknum][1] = np.random.uniform(.2, 2) 
         if axis == 'z': 
-            bdy.sizes[linknum][2] = np.random.uniform(.75, 1.25) 
+            bdy.sizes[linknum][2] = np.random.uniform(.2, 2) 
 
         # Changing Joint Axis'
         randjoint = random.choice([k for k in bdy.jointAxis.keys()])
         newJA = self.generate_joint_axis()
         bdy.jointAxis[randjoint] = newJA
 
+        # Regenerating new body
+        bdy.Generate_Body(bodyID)
         # Regenerating new body
         #bdy.Generate_Body()
 
@@ -237,7 +240,7 @@ class SOLUTION:
         self.myID = id
 
     def create_sensor_ind(self): 
-        length = np.random.randint(1, self.numlinks)
+        length = np.random.randint(3, self.numlinks)
         lst = []
         for i in range(length): 
             lst.append(np.random.randint(2, self.numlinks))
