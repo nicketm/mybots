@@ -12,15 +12,13 @@ class SOLUTION:
     def __init__(self, nextAvailableID):
         random.seed()
         self.myID = nextAvailableID
-        self.numlinks = np.random.randint(4,5) 
-        print('numlinks', self.numlinks)
+        self.numlinks = np.random.randint(3,9) 
         self.numjoints = self.numlinks - 1
         self.weights = np.random.rand(self.numlinks, self.numjoints)
         self.weights = self.weights * 2 - 1
         self.sensor_ind = self.create_sensor_ind()
         self.numsensor = len(self.sensor_ind)
         #self.numlinks = 2 
-        print('sensor ind', self.sensor_ind)
         self.joints = []
         self.bodyID = nextAvailableID
         self.bodies = {}
@@ -46,7 +44,6 @@ class SOLUTION:
             time.sleep(0.01)
         f = open(fitness_s, "r")
         self.fitness = float(f.read())
-        #print(self.fitness)
         f.close()
         os.system('rm '+fitness_s)
 
@@ -240,7 +237,7 @@ class SOLUTION:
         self.myID = id
 
     def create_sensor_ind(self): 
-        length = np.random.randint(3, self.numlinks)
+        length = np.random.randint(2, self.numlinks)
         lst = []
         for i in range(length): 
             lst.append(np.random.randint(2, self.numlinks))

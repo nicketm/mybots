@@ -17,7 +17,6 @@ class BODY:
         self.jointAxis = jointaxis
         self.sizes = sizes
         self.numlinks = numlinks
-        #print(self.joints)
 
 
 
@@ -32,6 +31,7 @@ class BODY:
         # start link
         pyrosim.Send_Cube(name="Link" + str(0), pos=[0,0,2] , size=[sizex, sizey, sizez], color = 'blue')
         for i in range(1, self.numlinks): 
+
             sizex =  self.sizes[i][0]
             sizey =  self.sizes[i][1]
             sizez =  self.sizes[i][2]
@@ -58,6 +58,15 @@ class BODY:
                     pyrosim.Send_Cube(name="Link" + str(i), pos=[0, 0, sizez + 1.8]  , size=self.sizes[i], color = 'green')
                 else: 
                     pyrosim.Send_Cube(name="Link" + str(i), pos=[0, 0, sizez + 1.8]  , size=self.sizes[i], color = 'blue')
+                for j in self.joints: 
+                    if j[1] == i: 
+                        pyrosim.Send_Joint( name = "Link" + str(j[0]) + "_Link" + str(i) , parent= "Link" + str(j[0]) , child = "Link" + str(i) , type = "revolute", position = self.directions[i], jointAxis = self.jointAxis[(j[0], i)])
+                        break
+            if self.directions[i][3] == '-x':
+                if i in self.sensor_ind: 
+                    pyrosim.Send_Cube(name="Link" + str(i), pos=[sizex +.2, 0, 2]  , size=self.sizes[i], color = 'green')
+                else: 
+                    pyrosim.Send_Cube(name="Link" + str(i), pos=[sizex + .2, 0, 0]  , size=self.sizes[i], color = 'blue')
                 for j in self.joints: 
                     if j[1] == i: 
                         pyrosim.Send_Joint( name = "Link" + str(j[0]) + "_Link" + str(i) , parent= "Link" + str(j[0]) , child = "Link" + str(i) , type = "revolute", position = self.directions[i], jointAxis = self.jointAxis[(j[0], i)])

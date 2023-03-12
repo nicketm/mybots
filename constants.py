@@ -28,8 +28,8 @@ targetAngles_FL = np.array([])
 for i in range(1, 1000): 
     targetAngles_FL = np.append(targetAngles_FL, amplitude_FL * np.sin(frequency_FL*mottorcommandvector[i]+phaseOffset_FL))
 
-numberOfGenerations = 100
-populationSize = 2
+numberOfGenerations = 500
+populationSize = 10
 
 numSensorNeurons = 2
 numMotorNeurons = 1

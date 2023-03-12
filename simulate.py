@@ -11,7 +11,6 @@ import sys
 
 
 
-print('IN SIMULATION')
 directOrGui = sys.argv[1]
 solutionID = sys.argv[2]
 simulation = SIMULATION(directOrGui, solutionID)
