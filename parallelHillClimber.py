@@ -19,17 +19,13 @@ class PARALLEL_HILL_CLIMBER:
         #self.parent = SOLUTION()
         #print(self.parents)
         self.fitness_w = {}
-        self.fitness_w[0] = []
-        self.fitness_w[1] = []
-        self.fitness_w[2] = []
-        self.fitness_w[3] = []
-        self.fitness_w[4] = []
+        for i in range(10): 
+             self.fitness_w[i] = []
 
     def Spawn(self): 
         self.children = {}
         for parent in self.parents: 
             self.children[parent] = copy.deepcopy(self.parents[parent])
-            print('IN SSPWAN', self.children[parent])
             self.children[parent].Set_ID(self.nextAvailableID)
             self.nextAvailableID += 1
             #print(self.children[parent])
@@ -48,6 +44,7 @@ class PARALLEL_HILL_CLIMBER:
 
         #self.parent.Evaluate("GUI")
         for currentGeneration in range(c.numberOfGenerations):
+            print(' GENERATION: ', currentGeneration)
             self.Evolve_For_One_Generation()
 
     def Evolve_For_One_Generation(self):
@@ -101,7 +98,7 @@ class PARALLEL_HILL_CLIMBER:
                 lf = self.parents[parent].fitness
                 keyid = parent
         
-        self.parents[keyid].Start_Simulation("GUI")
+        self.parents[keyid].Continue_Simulation("GUI")
 
         #self.parent.Evaluate("GUI")
         pass

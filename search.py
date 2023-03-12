@@ -5,6 +5,7 @@ import random
 
 phc = PARALLEL_HILL_CLIMBER()
 phc.Evolve()
+input("Press Enter to continue...")
 phc.Show_Best()
 #phc.Show_Worst()
 
